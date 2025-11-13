@@ -1,0 +1,30 @@
+{% extends "utils/base.html" %}
+{% block start %}
+<div class="container mt-5 ">
+    <div class="col-6 mx-auto p-4 shadow" style="border: none;">
+        <form method="POST">
+          {% csrf_token %}
+        {% include "utils/alerts.html" %}
+  
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">OTP</label>
+    <input type="text" name='otp' class="form-control" id="exampleInputPassword1">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+    </div>
+    </div>
+
+
+<script>
+  function sendotp()
+  {
+    var email=document.getElementById('email').value
+    if(email==="")
+    alert('email cannot be blank')
+   window.location.href = `/accounts/send_otp/${email}/`
+  }
+</script>
+{% endblock %}

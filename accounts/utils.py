@@ -17,3 +17,16 @@ def sendEmailToken(email,token):
     fail_silently=False,
 )
     
+def sendotptoEmail(email,otp):
+    subject="OTP For Account Login"
+    message=f"""
+    Please use this otp to login
+{otp}
+    """
+    send_mail(
+    subject,
+    message,
+    settings.EMAIL_HOST_USER,
+    [email],
+    fail_silently=False,
+)
