@@ -186,6 +186,6 @@ def add_hotel(request):
         )
         messages.success(request, "Hotel Created Successfully")
         return redirect('/accounts/dashboard/')
-        
-    return render(request,'vendor/add_hotel.html')
+    amenties=Amenties.objects.all() 
+    return render(request,'vendor/add_hotel.html',context={'amenties':amenties})
     

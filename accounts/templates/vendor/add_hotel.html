@@ -15,7 +15,15 @@
   <textarea name='hotel_descrption' class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
   <label for="floatingTextarea">Hotel Description</label>
 </div>
-
+<br/>
+ <label for="floatingTextarea">Hotel Amenties</label>
+<select class="form-select" aria-label="Default select example" multiple>
+    {{amenties}}
+    {% for aminity in amenties%}
+  <option value="{{aminity.id}}">{{aminity.name}}</option>
+{% endfor %}
+</select> 
+<br/>
 <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Price</label>
     <input type="number" name='hotel_price' id='password'class="form-control" id="exampleInputPassword1">
