@@ -1,6 +1,8 @@
 import uuid
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils.text import slugify
+from .models import *
 def generateRandomToken():
     return str(uuid.uuid4())
 def sendEmailToken(email,token):
@@ -30,3 +32,11 @@ def sendotptoEmail(email,otp):
     [email],
     fail_silently=False,
 )
+
+def generateslug(instance):
+    slug=slugify(instance.hotel_name)+(uuid.uuid4()).split('-')[0]
+    if Hotels.objects.filter(slug=slug).exists():
+        return generateslug(instance)
+    return slug
+                                                            
+    
