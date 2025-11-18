@@ -38,6 +38,8 @@ class Hotels(models.Model):
     hotel_offer_price=models.FloatField()
     hotel_location=models.TextField()
     is_active=models.BooleanField(default=True)
+    def __str__(self):
+        return self.hotel_name
     
 class HotelImages(models.Model):
     hotel=models.ForeignKey(Hotels,on_delete=models.CASCADE,related_name='hotel_images')

@@ -33,10 +33,10 @@ def sendotptoEmail(email,otp):
     fail_silently=False,
 )
 
-def generateslug(instance):
-    slug=slugify(instance.hotel_name)+(uuid.uuid4()).split('-')[0]
-    if Hotels.objects.filter(slug=slug).exists():
-        return generateslug(instance)
+def generateslug(hotel_name):
+    slug=slugify(hotel_name)+"-"+str(uuid.uuid4()).split('-')[0]
+    if Hotels.objects.filter(hotel_slug=slug).exists():
+        return generateslug(hotel_name)
     return slug
                                                             
     

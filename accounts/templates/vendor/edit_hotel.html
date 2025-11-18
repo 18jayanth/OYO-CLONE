@@ -2,17 +2,17 @@
 {% block start %}
 <div class="container mt-5 ">
     <div class="col-6 mx-auto p-4 shadow" style="border: none;">
-        <h2>Add Hotels</h2>
+        <h2>Edit  Hotels</h2>
         <form method="POST">
           {% csrf_token %}
         {% include "utils/alerts.html" %}
  <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Name</label>
-    <input type="text" name='hotel_name' class="form-control" id="hotel_name">
+    <input type="text" value={{hotel.hotel_name}} name='hotel_name' class="form-control" id="hotel_name">
   </div>
 
     <div class="form-floating">
-  <textarea name='hotel_descrption' name='hotel_descrption' id="hotel_descrption" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  <textarea name='hotel_descrption' name='hotel_descrption' value={{hotel.hotel_description}} id="hotel_descrption" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
   <label for="floatingTextarea">Hotel Description</label>
 </div>
 <br/>
@@ -20,23 +20,23 @@
 <select class="form-select" name='amenties'id='amenties' aria-label="Default select example" multiple>
     {{amenties}}
     {% for aminity in amenties%}
-  <option value="{{aminity.id}}">{{aminity.name}}</option>
+  <option value="{{aminity.id}}" {% if aminity in hotel.amenties.all %} selected {%endif%}>{{aminity.name}}</option>
 {% endfor %}
 </select> 
 <br/>
 <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Price</label>
-    <input type="number" name='hotel_price' id='hotel_price' class="form-control" >
+    <input type="number" value={{hotel.hotel_price}} name='hotel_price' id='hotel_price' class="form-control" >
   </div>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Offer Price</label>
-    <input type="number" name='hotel_offer_price' id='hotel_offer_price' class="form-control" >
+    <input type="number" value={{hotel.hotel_offer_price}} name='hotel_offer_price' id='hotel_offer_price' class="form-control" >
   </div>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Location</label>
-    <input type="text" name='hotel_location' id='hotel_location' class="form-control">
+    <input type="text" value={{hotel.hotel_location}} name='hotel_location' id='hotel_location' class="form-control">
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
