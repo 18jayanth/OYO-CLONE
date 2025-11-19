@@ -2,4 +2,3 @@ django
 gunicorn
 django-environ
 python-dotenv
-django-dotenv
