@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "home",
     "accounts",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -49,13 +50,23 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+from dotenv import load_dotenv
+import os
+env=load_dotenv()
+NAME=os.getenv('NAME')
+PASSWORD=os.getenv('PASSWORD')
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME":"oyo_clone",
+        "NAME":NAME,
         "USER":"root",
-        "PASSWORD":"jayantH12",
+        "PASSWORD":PASSWORD,
         "HOST":"127.0.0.1",
         "PORT":"3306",
         'OPTIONS': {
@@ -66,12 +77,41 @@ DATABASES = {
        
     }
 }
+# settings.py
+
+# Enable caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',  # Database table for caching
+        'TIMEOUT': 3600,  # Cache timeout in seconds (1 hour)
+    },
+    'memcached': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',  # Memcached server address
+    },
+    'redis': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Redis server address
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+# Use database caching as default cache backend
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 3600  # Cache timeout for cache middleware (1 hour)
+
+
+EMAIL_HOST_USER=os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
-EMAIL_HOST_USER="jayanthtulugu@gmail.com"
-EMAIL_HOST_PASSWORD="ehch efoe arba gknu"
+EMAIL_HOST_USER=EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD
 
 ROOT_URLCONF = "oyo_clone.urls"
 
@@ -91,7 +131,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "oyo_clone.wsgi.application"
-
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

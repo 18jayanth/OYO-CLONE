@@ -3,9 +3,12 @@ from accounts.models import *
 from django.http import HttpResponseRedirect
 from datetime import datetime
 from django.contrib import messages
+from django.views.decorators.cache import cache_page
+
 # Create your views here.
+#@cache_page(60 * 15)
 def index(request):
-    hotels=Hotels.objects.all()
+    hotels=Hotels.objects.all().select_related('hotel_owner')
     if request.GET.get('search'):
         hotels=hotels.filter(hotel_name__icontains=request.GET.get('search'))
     if request.GET.get('sort_by'):
