@@ -3,3 +3,4 @@ gunicorn
 django-environ
 python-dotenv
 django-debug-toolbar
+mysqlclient
