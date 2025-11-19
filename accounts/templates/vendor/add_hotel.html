@@ -11,10 +11,11 @@
     <input type="text" name='hotel_name' class="form-control" id="hotel_name">
   </div>
 
+    <div class="mb-3">
+    <label for="floatingTextarea">Hotel Description</label>
     <div class="form-floating">
-  <textarea name='hotel_descrption' name='hotel_descrption' id="hotel_descrption" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-  <label for="floatingTextarea">Hotel Description</label>
-</div>
+    <textarea name='hotel_descrption' id='flora' name='hotel_descrption' value={{hotel.hotel_description}} id="hotel_descrption" class="form-control" placeholder="Leave a comment here"></textarea>
+  </div>
 <br/>
  <label for="floatingTextarea">Hotel Amenties</label>
 <select class="form-select" name='amenties'id='amenties' aria-label="Default select example" multiple>
@@ -44,4 +45,7 @@
 </form>
     </div>
     </div>
+  <script>
+var editor = new FroalaEditor('#flora');
+</script>
 {% endblock %}

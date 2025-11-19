@@ -3,9 +3,10 @@ from .models  import *
 from django.db.models import Q
 from django.contrib import messages
 from .utils import *
-from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
+from django.http import HttpResponse,HttpResponseRedirect
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def login_page(request):
     if request.method=='POST':
@@ -151,7 +152,7 @@ def login_vendor(request):
         
             
         if hotel_user:
-            messages.success(request, "Login Successfully")
+            #messages.success(request, "Login Successfully")
             login(request,hotel_user)
             return redirect('/accounts/dashboard/')
         messages.warning(request, "Invalid Creditianls")
@@ -203,7 +204,7 @@ def add_hotel(request):
     amenties=Amenties.objects.all() 
     return render(request,'vendor/add_hotel.html',context={'amenties':amenties})
 
-from django.http import HttpResponseRedirect
+
 @login_required(login_url='login_vendor') 
 def upload_images(request,slug):
     hotel_obj=Hotels.objects.get(hotel_slug=slug)
@@ -247,3 +248,11 @@ def edit_hotel(request,slug):
     amenties=Amenties.objects.all() 
     context={'hotel':hotel_obj,'amenties':amenties}
     return render(request,'vendor/edit_hotel.html',context)
+
+
+def logout_view(request):
+    messages.success(request,"Logged Out Successfully")
+    logout(request)
+    
+    return redirect('/accounts/login-vendor/')
+    

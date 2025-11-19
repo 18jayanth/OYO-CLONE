@@ -3,17 +3,27 @@
 <div class="container mt-5 ">
     <div class="col-6 mx-auto p-4 shadow" style="border: none;">
         <h2>Edit  Hotels</h2>
+       
         <form method="POST">
           {% csrf_token %}
         {% include "utils/alerts.html" %}
+ {% for booking in hotel.bookings.all %}
+ <div class="list-group">
+<li class="list-group-item">Start Date-{{ booking.booking_start_date }}</li>
+<li class="list-group-item">End Date-{{ booking.booking_end_date }}</li>
+        </div>
+{% endfor %}
  <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Hotel Name</label>
     <input type="text" value={{hotel.hotel_name}} name='hotel_name' class="form-control" id="hotel_name">
   </div>
 
+<div class="mb-3">
+    <label for="floatingTextarea">Hotel Description</label>
     <div class="form-floating">
-  <textarea name='hotel_descrption' name='hotel_descrption' value={{hotel.hotel_description}} id="hotel_descrption" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-  <label for="floatingTextarea">Hotel Description</label>
+    <textarea name='hotel_descrption' id='flora' name='hotel_descrption' value={{hotel.hotel_description}} id="hotel_descrption" class="form-control" placeholder="Leave a comment here"></textarea>
+  </div>
+  
 </div>
 <br/>
  <label for="floatingTextarea">Hotel Amenties</label>
@@ -44,4 +54,7 @@
 </form>
     </div>
     </div>
+<script>
+var editor = new FroalaEditor('#flora');
+</script>
 {% endblock %}

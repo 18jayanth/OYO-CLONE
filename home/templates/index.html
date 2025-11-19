@@ -1,55 +1,42 @@
 {% extends "utils/base.html" %}
 {% block start %}
 <div class="container mt-5 ">
-    <div class="row">
-
-    <div class="col-md-3 ">
-<div class="card shadow-lg" style="width: 16rem;">
+ <div class="col-6">
+  <form>
+    <input class="form-label" name="search" placeholder="search" type="text"/>
+    <select name="sort_by">
+      <option>Select Order</option>
+      <option value="sort_low">Sort Low to High</option>
+      <option value="sort_high">Sort High to Low</option>
+    </select>
+    <button type="submit" class="btn btn-warning">Submit</button>
+  </form>
+</div>
+  <div class="row">
+  {% for hotel in hotels %}
+<div class="col-4 mt-5  ">
+<div class="card shadow-lg">
+  <a href="{% url 'hotel_detail' hotel.hotel_slug %}">
+  {% if hotel.hotel_images.first %}
   <img src="https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg?s=612x612&w=0&k=20&c=9QtwJC2boq3GFHaeDsKytF4-CavYKQuy1jBD2IRfYKc=" class="card-img-top" alt="...">
+  {% else %}
+  <img src="https://img.freepik.com/premium-vector/no-photo-available-vector-icon-default-image-symbol-picture-coming-soon-web-site-mobile-app_87543-18055.jpg" class="card-img-top" alt="...">
+  {% endif %}
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <h5 class="card-title">{{hotel.hotel_name}}</h5>
+  Price <span class="badge text-bg-danger"> ${{hotel.hotel_price}}</span>
+  <br/>
+  Offer Price <span class="badge text-bg-success"> ${{hotel.hotel_offer_price}}</span>
+  <br/>
+  <br/>
+    <p class="card-text">{{hotel.hotel_location}}</p>
     <span class="badge text-bg-primary">Swimming Pool</span>
     <span class="badge text-bg-primary">Playing Arena</span>
   </div>
+  </a>
 </div>
 </div>
-
- <div class="col-md-3 ">
-<div class="card shadow-lg" style="width: 16rem;">
-  <img src="https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg?s=612x612&w=0&k=20&c=9QtwJC2boq3GFHaeDsKytF4-CavYKQuy1jBD2IRfYKc=" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <span class="badge text-bg-primary">Swimming Pool</span>
-    <span class="badge text-bg-primary">Playing Arena</span>
-  </div>
-</div>
-</div>
-
- <div class="col-md-3 ">
-<div class="card shadow-lg" style="width: 16rem;">
-  <img src="https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg?s=612x612&w=0&k=20&c=9QtwJC2boq3GFHaeDsKytF4-CavYKQuy1jBD2IRfYKc=" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <span class="badge text-bg-primary">Swimming Pool</span>
-    <span class="badge text-bg-primary">Playing Arena</span>
-  </div>
-</div>
-</div>
-
- <div class="col-md-3 ">
-<div class="card shadow-lg" style="width: 16rem;">
-  <img src="https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg?s=612x612&w=0&k=20&c=9QtwJC2boq3GFHaeDsKytF4-CavYKQuy1jBD2IRfYKc=" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <span class="badge text-bg-primary">Swimming Pool</span>
-    <span class="badge text-bg-primary">Playing Arena</span>
-  </div>
-</div>
- </div>
+{% endfor %}
 </div>
 </div>
 {% endblock %}
