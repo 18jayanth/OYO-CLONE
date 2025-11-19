@@ -57,7 +57,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 # from dotenv import load_dotenv
-# import os
+import os
 # env=load_dotenv()
 # NAME=os.getenv('NAME')
 # PASSWORD=os.getenv('PASSWORD')
