@@ -4,3 +4,5 @@ django-environ
 python-dotenv
 django-debug-toolbar
 mysqlclient
+dj-database-url 
+psycopg2-binary

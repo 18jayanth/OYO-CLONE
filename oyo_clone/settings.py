@@ -56,26 +56,30 @@ MIDDLEWARE = [
     'django.middleware.cache.FetchFromCacheMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
-from dotenv import load_dotenv
-import os
-env=load_dotenv()
-NAME=os.getenv('NAME')
-PASSWORD=os.getenv('PASSWORD')
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME":NAME,
-        "USER":"root",
-        "PASSWORD":PASSWORD,
-        "HOST":"127.0.0.1",
-        "PORT":"3306",
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES';",
+# from dotenv import load_dotenv
+# import os
+# env=load_dotenv()
+# NAME=os.getenv('NAME')
+# PASSWORD=os.getenv('PASSWORD')
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME":NAME,
+#         "USER":"root",
+#         "PASSWORD":PASSWORD,
+#         "HOST":"127.0.0.1",
+#         "PORT":"3306",
+#         'OPTIONS': {
+#             'charset': 'utf8mb4',
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES';",
             
-        },
+#         },
        
-    }
+#     }
+# }
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 # settings.py
 
